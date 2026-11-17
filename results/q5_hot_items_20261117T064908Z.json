@@ -1,0 +1,8 @@
+{
+  "query": "q5_hot_items",
+  "run_started_utc": "2026-11-17T06:49:08.078004+00:00",
+  "duration_seconds": 120.0,
+  "batches_observed": 12,
+  "total_input_rows": 19165,
+  "average_input_rate_rows_per_sec": 174.1
+}

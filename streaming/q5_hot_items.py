@@ -16,7 +16,10 @@ On top of the Step 3 windowed bid count, this adds:
 Run with: python -m streaming.q5_hot_items --duration 120
 """
 import argparse
+import json
 import time
+from datetime import datetime, timezone
+from pathlib import Path
 
 from pyspark.sql import functions as F
 from pyspark.sql.streaming import StreamingQueryListener
@@ -68,9 +71,15 @@ class ThroughputListener(StreamingQueryListener):
         print(f"batches observed: {len(self.batches)}")
         print(f"total input rows: {total_rows}")
         print(f"average input rate: {avg_rate:.1f} rows/sec")
+        return {
+            "batches_observed": len(self.batches),
+            "total_input_rows": total_rows,
+            "average_input_rate_rows_per_sec": round(avg_rate, 1),
+        }
 
 
 def main(duration_seconds: float):
+    run_started = datetime.now(timezone.utc)
     spark = get_spark_session("q5-hot-items")
 
     raw = (
@@ -121,7 +130,20 @@ def main(duration_seconds: float):
     query.stop()
     print("[q5] stopped cleanly")
 
-    listener.summary()
+    stats = listener.summary()
+
+    result = {
+        "query": "q5_hot_items",
+        "run_started_utc": run_started.isoformat(),
+        "duration_seconds": duration_seconds,
+        **stats,
+    }
+    results_dir = Path("results")
+    results_dir.mkdir(exist_ok=True)
+    out_path = results_dir / f"q5_hot_items_{run_started.strftime('%Y%m%dT%H%M%SZ')}.json"
+    with open(out_path, "w") as f:
+        json.dump(result, f, indent=2)
+    print(f"[q5] results written to {out_path}")
 
 
 if __name__ == "__main__":
