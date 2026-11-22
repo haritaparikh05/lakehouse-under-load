@@ -1,0 +1,8 @@
+{
+  "query": "q2_selection",
+  "run_started_utc": "2026-11-22T19:53:03.040462+00:00",
+  "duration_seconds": 60.0,
+  "batches_observed": 6,
+  "total_input_rows": 8705,
+  "average_input_rate_rows_per_sec": 174.1
+}
