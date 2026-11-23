@@ -1,0 +1,8 @@
+{
+  "query": "q3_local_items",
+  "run_started_utc": "2026-11-23T20:06:13.469946+00:00",
+  "duration_seconds": 120.0,
+  "batches_observed": 9,
+  "total_input_rows": 1224,
+  "average_input_rate_rows_per_sec": 15.3
+}
