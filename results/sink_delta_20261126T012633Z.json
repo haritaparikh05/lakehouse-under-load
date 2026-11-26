@@ -1,0 +1,8 @@
+{
+  "sink": "delta",
+  "run_started_utc": "2026-11-26T01:26:33.937785+00:00",
+  "duration_seconds": 60.0,
+  "batches_observed": 5,
+  "total_input_rows": 7102,
+  "average_input_rate_rows_per_sec": 177.5
+}
