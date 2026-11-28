@@ -1,0 +1,8 @@
+{
+  "sink": "iceberg",
+  "run_started_utc": "2026-11-28T00:44:10.490192+00:00",
+  "duration_seconds": 180.0,
+  "batches_observed": 4,
+  "total_input_rows": 28501,
+  "average_input_rate_rows_per_sec": 168.6
+}
